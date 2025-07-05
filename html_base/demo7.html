@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>云朵咖啡点餐系统</title>
+    <style>
+        /* ===== 全局样式 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui;
+            background: linear-gradient(135deg, #f9f3e9 0%, #f5e8d0 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #5a3921;
+        }
+ 
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+ 
+        /* ===== 标题样式 ===== */
+        header {
+            text-align: center;
+            padding: 2rem 0;
+            position: relative;
+        }
+ 
+        h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(to right, #8B4513, #D2691E);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(139, 69, 19, 0.1);
+        }
+ 
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+ 
+        /* ===== 菜单卡片 ===== */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 3rem;
+        }
+ 
+        .menu-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(90, 57, 33, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+ 
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(90, 57, 33, 0.15);
+        }
+ 
+        .menu-img {
+            height: 200px;
+            background-color: #e6d2b5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+ 
+        .menu-content {
+            padding: 1.5rem;
+        }
+ 
+        .menu-title {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.4rem;
+            margin-bottom: 0.7rem;
+        }
+ 
+        .price-tag {
+            background: #8B4513;
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+ 
+        /* ===== 订单表单 ===== */
+        .order-form {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(90, 57, 33, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+ 
+        .form-group {
+            margin-bottom: 1.8rem;
+            position: relative;
+        }
+ 
+        label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-weight: 500;
+        }
+ 
+        input, select, textarea {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e6d2b5;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+ 
+        /* 输入框聚焦特效 */
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #8B4513;
+            box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.2);
+        }
+ 
+        /* 自定义单选按钮 */
+        .radio-group {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .radio-option {
+            flex: 1;
+            position: relative;
+        }
+        
+        .radio-option input {
+            position: absolute;
+            opacity: 0;
+        }
+        
+        .radio-label {
+            display: block;
+            padding: 12px;
+            text-align: center;
+            border: 2px solid #e6d2b5;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .radio-option input:checked + .radio-label {
+            background: #8B4513;
+            color: white;
+            border-color: #8B4513;
+        }
+ 
+        /* 提交按钮 */
+        .submit-btn {
+            background: linear-gradient(to right, #8B4513, #A0522D);
+            color: white;
+            padding: 16px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(139, 69, 19, 0.3);
+        }
+ 
+        /* ===== 响应式设计 ===== */
+        @media (max-width: 768px) {
+            .menu-grid {
+                gap: 15px;
+            }
+            
+            .order-form {
+                padding: 1.8rem;
+            }
+            
+            .radio-group {
+                flex-direction: column;
+            }
+        }
+ 
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .menu-img {
+                height: 160px;
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>☁ 云朵咖啡</h1>
+            <p class="subtitle">在线点餐系统 | 每日新鲜烘焙</p>
+        </header>
+ 
+        <div class="menu-grid">
+            <!-- 咖啡1 -->
+            <div class="menu-card">
+                <div class="menu-img">☕</div>
+                <div class="menu-content">
+                    <div class="menu-title">
+                        <span>拿铁咖啡</span>
+                        <span class="price-tag">¥28</span>
+                    </div>
+                    <p>精选巴西咖啡豆，搭配丝滑鲜奶，顶部拉花艺术</p>
+                </div>
+            </div>
+ 
+            <!-- 咖啡2 -->
+            <div class="menu-card">
+                <div class="menu-img">🍵</div>
+                <div class="menu-content">
+                    <div class="menu-title">
+                        <span>抹茶拿铁</span>
+                        <span class="price-tag">¥32</span>
+                    </div>
+                    <p>日本宇治抹茶粉，无咖啡因，搭配香浓牛奶</p>
+                </div>
+            </div>
+ 
+            <!-- 甜点 -->
+            <div class="menu-card">
+                <div class="menu-img">🍰</div>
+                <div class="menu-content">
+                    <div class="menu-title">
+                        <span>提拉米苏</span>
+                        <span class="price-tag">¥36</span>
+                    </div>
+                    <p>马斯卡彭芝士与意式浓缩咖啡的完美结合</p>
+                </div>
+            </div>
+        </div>
+ 
+        <!-- 订单表单 -->
+        <form class="order-form">
+            <div class="form-group">
+                <label for="name">姓名</label>
+                <input type="text" id="name" placeholder="请输入姓名" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">手机号</label>
+                <input type="tel" id="phone" placeholder="请输入11位手机号" pattern="\d{11}" required>
+            </div>
+            
+            <div class="form-group">
+                <label>取餐方式</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="takeout" name="delivery" checked>
+                        <label class="radio-label" for="takeout">到店自取</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="delivery" name="delivery">
+                        <label class="radio-label" for="delivery">外卖配送</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="notes">特殊要求</label>
+                <textarea id="notes" rows="3" placeholder="少糖/去冰/过敏原等要求..."></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">提交订单</button>
+        </form>
+    </div>
+</body>
+</html>

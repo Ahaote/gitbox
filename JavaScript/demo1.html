@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JS 测试</title>
+</head>
+<body>
+
+    <div id="text-box">原始文本</div>
+    <button onclick="changeText()">修改文本</button>
+
+    <div id="container"></div>
+    <button onclick="addElement()">添加元素</button>
+    <button onclick="removeElement()">删除元素</button>
+
+    <div id="colorBox" sytle="width:100px;height:100px;background:#ccc">点我变色</div>
+
+    <button id="eventBtn">显示时间</button>
+    <p id="display"></p>
+
+</body>
+
+<script>
+
+//获取元素与修改
+function changeText() {
+    //通过id获取元素
+    const box = document.getElementById("text-box");
+    //修改文本内容
+    box.textContent = "Hello DOM!";
+    //添加CSS样式
+    box.style.color = "red";
+}
+
+
+//元素创建与删除
+function addElement() {
+    const container = document.getElementById("container");
+
+    //创建新元素
+    const newDiv = document.createElement("div");
+    newDiv.textContent = "新创建的元素";
+    newDiv.className = "box"
+
+    //添加元素
+    container.appendChild(newDiv);
+}
+
+function removeElement() {
+    const lastChild = document.querySelector("#container .box:last-Child");
+    lastChild.remove();
+}
+
+//样式控制
+const box = document.getElementById("colorBox");
+box.onclick = function() {
+    // 修改内联样式
+    this.style.backgroundColor = "lightblue";
+    // 切换css类
+    this.classList.toggle("highlight");
+};
+
+
+const btn = document.getElementById("eventBtn"); 
+const display = document.getElementById("display"); 
+ 
+// 事件监听（非onclick属性）
+btn.addEventListener("click",  function() {
+  display.textContent  = new Date().toLocaleTimeString();
+  
+  // 移除事件（点击一次后失效）
+  this.removeEventListener("click",  arguments.callee); 
+});
+
+</script>
+
+
+
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "\u5f20\u4e09",
+  "age": 30,
+  "courses": [
+    "Python",
+    "Data"
+  ],
+  "is_student": false
+}

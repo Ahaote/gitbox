@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>现代登录界面</title>
+    <style>
+        /* 基础重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* 全屏渐变背景 */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        
+        /* 毛玻璃登录框 */
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+            padding: 40px 30px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+        
+        .login-header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .login-header p {
+            opacity: 0.8;
+        }
+        
+        /* 输入框组特效 */
+        .input-group {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 2px solid transparent;
+            border-radius: 10px;
+            outline: none;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .input-group input:focus {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
+        }
+        
+        .input-group label {
+            position: absolute;
+            left: 20px;
+            top: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            pointer-events: none;
+            transition: all 0.3s;
+        }
+        
+        .input-group input:focus + label,
+        .input-group input:not(:placeholder-shown) + label {
+            top: -12px;
+            left: 15px;
+            font-size: 0.85rem;
+            background: #6a11cb;
+            padding: 0 8px;
+            border-radius: 10px;
+        }
+        
+        /* 密码可见切换 */
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* 交互按钮 */
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(to right, #ff8a00, #da1b60);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s;
+            box-shadow: 0 4px 15px rgba(218, 27, 96, 0.3);
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(218, 27, 96, 0.4);
+        }
+        
+        /* 底部链接 */
+        .login-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+        
+        .login-footer a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        
+        .login-footer a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        /* 动态背景动画 */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>欢迎回来</h1>
+            <p>请输入您的账号信息</p>
+        </div>
+        
+        <form>
+            <div class="input-group">
+                <input type="text" id="username" placeholder=" " required>
+                <label for="username">用户名/邮箱</label>
+            </div>
+            
+            <div class="input-group">
+                <input type="password" id="password" placeholder=" " required>
+                <label for="password">密码</label>
+                <span class="password-toggle">👁️</span>
+            </div>
+            
+            <button type="submit" class="login-btn">登 录</button>
+            
+            <div class="login-footer">
+                <a href="#">忘记密码?</a>
+                <a href="#">注册新账号</a>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        // 密码可见性切换
+        const toggleBtn = document.querySelector('.password-toggle'); 
+        const passwordInput = document.getElementById('password'); 
+        
+        toggleBtn.addEventListener('click',  () => {
+            if (passwordInput.type  === 'password') {
+                passwordInput.type  = 'text';
+                toggleBtn.textContent  = '🔒';
+            } else {
+                passwordInput.type  = 'password';
+                toggleBtn.textContent  = '👁️';
+            }
+        });
+    </script>
+</body>
+</html>

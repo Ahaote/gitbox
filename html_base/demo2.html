@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* 主体容器设置 */
+        .container {
+            width: 800px;
+            height: 400px;
+            margin: 50px auto;  /* 水平居中 */
+            display: flex;      /* 启用弹性盒 */
+            overflow: hidden;  /* 隐藏溢出内容 */
+        }
+        
+        /* 图片盒子样式 */
+        .box {
+            flex: 1;          /* 等分容器宽度 */
+            transition: flex 0.5s; /* 过渡动画效果 */
+        }
+        
+        /* 悬停时扩展宽度 */
+        .box:hover {
+            flex: 3;
+        }
+        
+        /* 图片自适应处理 */
+        .box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 保持图片比例填充 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box"><img src="../html_test/1.jpg"></div> 
+        <div class="box"><img src="../html_test/2.jpg"></div> 
+        <div class="box"><img src="../html_test/3.jpg"></div> 
+    </div>
+</body>
+</html>

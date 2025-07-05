@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>导航</title>
+
+    <style>
+        .header {
+            height: 60px;
+            background: #333;
+            line-height: 60px;
+        }
+
+        .logo {
+            float: left;
+            width: 200px;
+            text-align: center;
+            font-size: 24px;
+            color: #fff;
+        }
+
+        .nav {
+            float: left;
+        }
+
+        .nav a {
+            color: #ccc;
+            padding: 0px 20px;
+            text-decoration: none;
+            transition: color 0.1s;
+        }
+
+        .nav a:hover {
+            color: #fff;
+        }
+
+        .search {
+            float: right;
+            margin-right: 30px;
+        }
+
+        .search input {
+            padding: 8px;
+            border-radius: 15px;
+            border: 2px solid #666;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="header">
+        <div class="logo">EDU Platform</div>
+        <div class="nav">
+            <a href="#">课程中心</a>
+            <a href="#">学习路径</a>
+            <a href="#">在线实验室</a>
+        </div>
+        <div class="search">
+            <input type="text" placeholder="搜索课程...">
+        </div>
+    </div>
+</body>
+</html>

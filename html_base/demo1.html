@@ -1,0 +1,56 @@
+<!--
+html用于盖房框架，css用于装修
+
+单标记：<标记名称>，如果<img>
+双标记:<>...</>
+标记名称一定小写
+
+html:5
+
+内容标记
+<h1></h1> -> 6
+<p align="left|center|right"></p>
+
+b i u d
+
+块级元素的默认宽度为父元素的100% （h1~h6 p ul ol)
+行级元素的宽度为实际内容的宽度，将呈现水平排列效果 (b i u d img a)
+
+ol <ol type="A|1|I" start="起始数据" reversed  ><li></li></ol>
+ul <ul type="disc(实心圆)|circle(空心圆)|square(实心方块)"
+
+如果要改变块、行级元素默认的显示只能通过css
+-->
+
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hallo</title>
+</head>
+<body>
+    <table border="1" width="90%" align="center" cellspacing="0" cellpadding="20">
+        <caption>员工信息表</caption>
+        <thead>
+          <tr bgcolor="#e0e0e0">
+            <th>姓名</th>
+            <th colspan="2">联系方式</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>李四</td>
+            <td>13800000000</td>
+            <td rowspan="2">市场部</td>
+          </tr>
+          <tr>
+            <td>王五</td>
+            <td>13900000000</td>
+          </tr>
+        </tbody>
+      </table>
+
+      
+</body>
+</html>
